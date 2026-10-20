@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    background-color: #e4e9f0;
+    background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+    background-size: 16px 16px;
+    color: #27272a;
+    font-family: -apple-system, BlinkMacSystemFont, "Malgun Gothic", "맑은 고딕", "Apple SD Gothic Neo", sans-serif;
+  }
+}
+
+/* Cyworld Retro Minihompy Utilities */
+.minihompy-outer {
+  background-color: #8bb5d8;
+  background-image: linear-gradient(180deg, #9ac1e2 0%, #76a5cf 100%);
+  border: 1px solid #5a8ab8;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+.minihompy-inner {
+  background-color: #f6f8fb;
+  border: 2px dashed #b8cde3;
+}
+
+.minihompy-content {
+  background-color: #ffffff;
+  border: 1px solid #d5dfea;
+}
+
+.retro-dotted-line {
+  border-bottom: 1px dashed #c0cedd;
+}
+
+.retro-tab-active {
+  background-color: #ffffff !important;
+  color: #1e3a5f !important;
+  font-weight: 700;
+  border-left: 1px solid transparent !important;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.retro-tab-inactive {
+  background-color: #2b70af !important;
+  color: #ffffff !important;
+  border-left: 1px solid #1f578c !important;
+}
+
+.retro-tab-inactive:hover {
+  background-color: #3b82c4 !important;
+}
+
+/* Custom retro scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}

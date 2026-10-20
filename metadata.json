@@ -1,0 +1,6 @@
+{
+  "name": "교직원 마이크로 바이브 미니홈피",
+  "description": "교직원들이 학교 업무 및 수업 관련 AI, 자동화 아이디어를 제안·투표하고 바이브 코딩 웹앱 결과를 공유하는 레트로 소통 플랫폼",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
