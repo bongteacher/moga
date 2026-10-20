@@ -57,8 +57,29 @@ export const AdminView: React.FC<AdminViewProps> = ({
 
   const handleDownloadCsv = () => {
     setExportNotice(true);
-    // Direct link to the backend CSV endpoint with UTF-8 BOM
-    window.location.href = '/api/admin/export-csv';
+    try {
+      const headers = ['등록일시', '카테고리', '닉네임', '제목', '상세설명', '공감수(좋아요)'];
+      const escapeCsv = (str: string | number) => `"${String(str || '').replace(/"/g, '""')}"`;
+      const rows = ideas.map((item) => [
+        escapeCsv(new Date(item.createdAt).toLocaleString('ko-KR')),
+        escapeCsv(item.category),
+        escapeCsv(item.nickname),
+        escapeCsv(item.title),
+        escapeCsv(item.description),
+        escapeCsv(item.likes),
+      ].join(','));
+      const csvContent = '\uFEFF' + [headers.join(','), ...rows].join('\r\n');
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', `교직원_아이디어_목록_${new Date().toISOString().slice(0, 10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch {
+      window.location.href = '/api/admin/export-csv';
+    }
     setTimeout(() => setExportNotice(false), 5000);
   };
 
@@ -164,15 +185,27 @@ export const AdminView: React.FC<AdminViewProps> = ({
               </div>
             </div>
 
-            {/* CSV Download Button */}
-            <button
-              onClick={handleDownloadCsv}
-              className="flex items-center gap-1.5 px-3 py-2 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded shadow-xs transition cursor-pointer self-start sm:self-auto"
-            >
-              <FileSpreadsheet className="w-4 h-4 text-emerald-200" />
-              <span>의견 목록 CSV 다운로드</span>
-              <Download className="w-3.5 h-3.5 text-emerald-200" />
-            </button>
+            {/* Action Buttons: CSV & Project ZIP */}
+            <div className="flex items-center gap-2 flex-wrap">
+              <a
+                href="/minihompy-project.zip"
+                download="school-vibe-hompy.zip"
+                className="flex items-center gap-1.5 px-3 py-2 bg-[#2b70af] hover:bg-[#1f588d] text-white font-bold rounded shadow-xs transition cursor-pointer text-xs"
+                title="GitHub에 업로드할 수 있는 전체 소스코드 압축파일 다운로드"
+              >
+                <Download className="w-4 h-4 text-blue-200" />
+                <span>깃허브 업로드용 ZIP 다운로드</span>
+              </a>
+
+              <button
+                onClick={handleDownloadCsv}
+                className="flex items-center gap-1.5 px-3 py-2 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded shadow-xs transition cursor-pointer self-start sm:self-auto text-xs"
+              >
+                <FileSpreadsheet className="w-4 h-4 text-emerald-200" />
+                <span>의견 목록 CSV 다운로드</span>
+                <Download className="w-3.5 h-3.5 text-emerald-200" />
+              </button>
+            </div>
           </div>
 
           {exportNotice && (

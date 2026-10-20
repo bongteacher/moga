@@ -18,6 +18,16 @@ export const FooterBar: React.FC<FooterBarProps> = ({ isAdmin, onOpenAdmin, setA
       </div>
 
       <div className="flex items-center gap-3">
+        {/* Direct Project Source Download Link */}
+        <a
+          href="/minihompy-project.zip"
+          download="school-vibe-hompy.zip"
+          className="flex items-center gap-1 text-[#2b70af] hover:text-[#1e588c] bg-[#eef5fc] hover:bg-[#e0eefb] px-2 py-0.5 rounded border border-[#cbe0f4] transition text-[10px] font-semibold"
+          title="GitHub 업로드용 전체 소스코드 ZIP 파일 다운로드"
+        >
+          <span>📦 소스코드 ZIP 다운로드</span>
+        </a>
+
         {isAdmin ? (
           <button
             onClick={() => setActiveTab('admin')}
